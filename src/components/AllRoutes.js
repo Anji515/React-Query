@@ -6,6 +6,7 @@ import RQData from './RQData'
 import RqSingleUser from './RqSingleUser'
 import RqParellerQueries from './RqParellerQueries'
 import { DynamicParallelPage } from './DynamicParallelQuery'
+import { InfiniteQueriesPage } from './InfinitScrolling'
 
 const AllRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AllRoutes = () => {
           <Route path='/rq-users/:userId' element={<RqSingleUser />}/>
           <Route path='/rq-parellel' element={<RqParellerQueries />}/>
           <Route path='/rq-dynamic-parellel' element={<DynamicParallelPage userIds={[1,3]}/>}/>
+          <Route path='/infinit-scrolling' element={<InfiniteQueriesPage/>}/>
     </Routes>
   )
 }

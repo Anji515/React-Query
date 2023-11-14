@@ -21,6 +21,9 @@ function App() {
             <li>
               <Link to='/rq-users'>RQ Data</Link>
             </li>
+            <li>
+              <Link to='/infinit-scrolling'>Infinit Scrolling Data</Link>
+            </li>
           </ul>
         </nav>
         <AllRoutes/>
