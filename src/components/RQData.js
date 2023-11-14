@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import useFetchRqUsers from "../hooks/useFetchUsers";
+import { useState } from "react";
 
 const RQData = () => {
 
+  const [pageNumber, setPageNumber]=useState(1)
   const onSuccess = (data) => {
     console.log('Perform side effect after data fetching',data)
   }
@@ -11,9 +13,9 @@ const RQData = () => {
     console.log('Perform side effect after encounter error',error)
   }
 
-  const { isLoading, data, isError, error, isFetching ,refetch } = useFetchRqUsers(onSuccess,onError)
+  const { isLoading, data, isError, error, isFetching ,refetch } = useFetchRqUsers(onSuccess,onError,pageNumber)
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <h2>Loading...</h2>;
   }
 
@@ -22,6 +24,7 @@ const RQData = () => {
   }
 
   return (
+    <>
     <div>
       <h1>RQ fetched users</h1>
       {/* <button onClick={refetch}>Fetch Users</button> */}
@@ -35,6 +38,13 @@ const RQData = () => {
          <Link to={`/rq-users/${user.id}`}>{user.name}</Link></h4>;
       })}
     </div>
+    <div>
+      <button disabled={pageNumber===1} onClick={()=>setPageNumber(page=>page-1)} >Prev</button>
+      <button disabled={true} >{pageNumber}</button>
+      <button disabled={pageNumber===2} onClick={()=>setPageNumber(page=>page+1)} >Next</button>
+    </div>
+    {isFetching && 'Loading...'}
+    </>
   );
 };
 
