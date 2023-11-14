@@ -6,7 +6,7 @@ export const Data = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5').then(res => {
+    axios.get('https://jsonplaceholder.typicode.com/users?_limit=5').then(res => {
       setData(res.data)
       setIsLoading(false)
     })
@@ -20,7 +20,7 @@ export const Data = () => {
     <>
       <h2>Traditional fetch Data</h2>
       {data.map(hero => {
-        return <div key={hero.id}>{hero.title}</div>
+        return <h4 key={hero.id}>{hero.name}</h4>
       })}
     </>
   )

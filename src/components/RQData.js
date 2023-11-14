@@ -1,30 +1,34 @@
-import axios from "axios"
-import { useQuery } from "react-query"
-
-const fetchRqUsers=()=>{
-  return axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=5`)
- }
+import useFetchRqUsers from "../hooks/useFetchUsers";
 
 const RQData = () => {
 
-  const { isLoading, data, isError, error }=useQuery('rq-users',fetchRqUsers)
-  
-  if(isLoading){
-    return <h2>Loading...</h2>
+  const onSuccess = (data) => {
+    console.log('Perform side effect after data fetching',data)
   }
 
-  if(isError){
-    return <h2>{error.message}</h2>
+  const onError = (error) => {
+    console.log('Perform side effect after encounter error',error)
+  }
+
+  const { isLoading, data, isError, error, isFetching ,refetch } = useFetchRqUsers(onSuccess,onError)
+
+  if (isLoading || isFetching) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isError) {
+    return <h2>{error.message}</h2>;
   }
 
   return (
     <div>
       <h1>RQ fetched users</h1>
-      {data?.data.map((data)=>{
-        return <h4 key={data.id}>{data.title}</h4>
+      {/* <button onClick={refetch}>Fetch Users</button> */}
+      {data.map((user) => {
+        return <h4 key={user}>{user}</h4>;
       })}
     </div>
-  )
-}
+  );
+};
 
-export default RQData
+export default RQData;
