@@ -19,10 +19,12 @@ export const useFetchRqUsers = (onSuccess,onError) => {
           // refetchInterval: 2000,
           // refetchIntervalInBackground: true,
           // enabled :false,
-          select: (data)=>{
-            const userData=data.data.map((user)=>user.name)
-            return userData
-          }
+
+        /* For fetching sepecific data */
+        //   select: (data)=>{
+        //     const userData=data.data.map((user)=>user.name)
+        //     return userData
+        //   }
         }
       );
 }

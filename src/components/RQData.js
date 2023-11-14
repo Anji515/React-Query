@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useFetchRqUsers from "../hooks/useFetchUsers";
 
 const RQData = () => {
@@ -24,8 +25,14 @@ const RQData = () => {
     <div>
       <h1>RQ fetched users</h1>
       {/* <button onClick={refetch}>Fetch Users</button> */}
-      {data.map((user) => {
+
+      {/* {data.map((user) => {
         return <h4 key={user}>{user}</h4>;
+      })} */}
+
+      {data?.data.map((user) => {
+        return <h4 key={user.id}>
+         <Link to={`/rq-users/${user.id}`}>{user.name}</Link></h4>;
       })}
     </div>
   );
