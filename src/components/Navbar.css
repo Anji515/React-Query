@@ -1,0 +1,16 @@
+.main-container{
+    position: sticky;
+    z-index: 99;
+}
+.Navbar {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+ul li{
+    border: 0px solid red;
+    color: rgb(52, 167, 29);
+    font-size: 25px;
+    font-style: bold;
+    /* background:rgb(165, 165, 91) */
+}

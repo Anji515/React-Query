@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useFetchRqUsers from "../hooks/useFetchUsers";
 import { useState } from "react";
+import Laoder from "./Laoder";
 
 const RQData = () => {
 
@@ -16,7 +17,7 @@ const RQData = () => {
   const { isLoading, data, isError, error, isFetching ,refetch } = useFetchRqUsers(onSuccess,onError,pageNumber)
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Laoder />;
   }
 
   if (isError) {
@@ -24,11 +25,10 @@ const RQData = () => {
   }
 
   return (
-    <>
-    <div>
-      <h1>RQ fetched users</h1>
+    <div style={{paddingLeft:'10%', paddingTop:'2%'}}>
+    <div >
+      <h1>Fetched Users From Rq</h1>
       {/* <button onClick={refetch}>Fetch Users</button> */}
-
       {/* {data.map((user) => {
         return <h4 key={user}>{user}</h4>;
       })} */}
@@ -44,7 +44,7 @@ const RQData = () => {
       <button disabled={pageNumber===2} onClick={()=>setPageNumber(page=>page+1)} >Next</button>
     </div>
     {isFetching && 'Loading...'}
-    </>
+    </div>
   );
 };
 

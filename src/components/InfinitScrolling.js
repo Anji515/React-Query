@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { useInfiniteQuery } from 'react-query'
 import axios from 'axios'
+import Laoder from './Laoder'
 
 const fetchColors = ({ pageParam = 1 }) => {
   return axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=3&_page=${pageParam}`)
@@ -16,7 +17,7 @@ export const InfiniteQueriesPage = () => {
     hasNextPage,
     isFetching,
     isFetchingNextPage
-  } = useInfiniteQuery(['colors'], fetchColors, {
+  } = useInfiniteQuery(['posts'], fetchColors, {
     getNextPageParam: (_lastPage, pages) => {
       if (pages.length < 5) {
         return pages.length + 1
@@ -27,7 +28,7 @@ export const InfiniteQueriesPage = () => {
   })
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Laoder />
   }
 
   if (isError) {
@@ -35,7 +36,7 @@ export const InfiniteQueriesPage = () => {
   }
 
   return (
-    <>
+    <div style={{paddingLeft:'10%', paddingTop:'2%'}}>
       <div>
         {data?.pages.map((group, i) => {
           return (
@@ -56,6 +57,6 @@ export const InfiniteQueriesPage = () => {
       </div>
       <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
       {!hasNextPage && <h4>Reached the limit ....</h4>}
-    </>
+    </div>
   )
 }

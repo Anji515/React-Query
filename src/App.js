@@ -3,30 +3,18 @@ import './App.css'
 import AllRoutes from './components/AllRoutes'
 import {QueryClientProvider , QueryClient} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
+import Navbar from './components/Navbar'
 const queryClient=new QueryClient();
 
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/users'>Traditional Data</Link>
-            </li>
-            <li>
-              <Link to='/rq-users'>RQ Data</Link>
-            </li>
-            <li>
-              <Link to='/infinit-scrolling'>Infinit Scrolling Data</Link>
-            </li>
-          </ul>
-        </nav>
-        <AllRoutes/>
+      <div style={{backgroundImage:'url("https://crowdforthink.com/assets/uploads/blogs/2d5e74db16c8f4e81c1c27fa4e390620.jpeg")',backgroundRepeat:'no-repeat', minHeight:'100vh'
+        // :'rgb(165, 165, 91)'
+        }}>
+        <Navbar />
+        <AllRoutes />
       </div>
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
     </QueryClientProvider>
