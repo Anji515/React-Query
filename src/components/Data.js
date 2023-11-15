@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Laoder from './Laoder'
 
 export const Data = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -13,7 +14,7 @@ export const Data = () => {
   }, [])
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Laoder />
   }
 
   return (
