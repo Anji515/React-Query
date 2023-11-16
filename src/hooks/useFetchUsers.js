@@ -1,9 +1,13 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const fetchRqUsers = (pageNumber) => {
-  return axios.get(`https://jsonplaceholder.typicode.com/users?_limit=5&_page=${pageNumber}`);
+  return axios.get(`http://localhost:3001/users?_limit=5&_page=${pageNumber}`);
 };
+
+const addUsers=(user)=>{
+  return axios.post(`http://localhost:3001/users`,user);
+}
 
 export const useFetchRqUsers = (onSuccess,onError,pageNumber) => {
    return useQuery(
@@ -33,3 +37,12 @@ export const useFetchRqUsers = (onSuccess,onError,pageNumber) => {
 }
 
 export default useFetchRqUsers
+
+export const useAddUserRqUsers =()=>{
+  const queryClient = useQueryClient();
+  return useMutation(addUsers,{
+    onSuccess : ()=>{
+      queryClient.invalidateQueries('rq-users')
+    }
+  })
+}

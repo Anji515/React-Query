@@ -18,11 +18,11 @@ export const Data = () => {
   }
 
   return (
-    <>
+    <div style={{paddingLeft:'10%', paddingTop:'2%'}}>
       <h2>Traditional fetch Data</h2>
       {data.map(hero => {
         return <h4 key={hero.id}>{hero.name}</h4>
       })}
-    </>
+    </div>
   )
 }

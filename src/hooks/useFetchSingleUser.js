@@ -4,7 +4,7 @@ import {useQuery , useQueryClient  } from "react-query";
 const fetchRqUsers = ({queryKey}) => {
 
     const userId = queryKey[1]
-  return axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  return axios.get(`http://localhost:3001/users/${userId}`);
 };
 
 const useFetchSingleUser = (userId) => {
