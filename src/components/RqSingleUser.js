@@ -16,7 +16,7 @@ const RqSingleUser = () => {
   }
 
   return (
-    <div>
+    <div style={{paddingLeft:'10%', paddingTop:'2%'}}>
       <h3>SingleUser Details</h3>
      <p>{data?.data.name} - {data?.data.email}</p>
     </div>

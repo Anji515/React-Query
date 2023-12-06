@@ -17,7 +17,7 @@ export const useFetchRqUsers = (onSuccess,onError,pageNumber) => {
         keepPreviousData: true, // to keep previous data until get the fresh data
         },
         {
-          // cacheTime:5000,
+          // cacheTime : 5000,
           onSuccess,
           onError,
           // staleTime:30000,
@@ -25,7 +25,7 @@ export const useFetchRqUsers = (onSuccess,onError,pageNumber) => {
           // refetchOnWindowFocus:true,
           // refetchInterval: 2000,
           // refetchIntervalInBackground: true,
-          // enabled :false,
+          // enabled : false,
 
         /* For fetching sepecific data */
           //   select: (data)=>{

@@ -2,8 +2,9 @@ import axios from "axios";
 import {useQuery , useQueryClient  } from "react-query";
 
 const fetchRqUsers = ({queryKey}) => {
-
-    const userId = queryKey[1]
+  
+  // console.log('query key', queryKey);
+  const userId = queryKey[1]
   return axios.get(`http://localhost:3001/users/${userId}`);
 };
 

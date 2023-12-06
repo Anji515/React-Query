@@ -1,13 +1,17 @@
-import { Fragment } from 'react'
+import { useEffect } from 'react'
 import { useInfiniteQuery } from 'react-query'
 import axios from 'axios'
 import Laoder from './Laoder'
+import { useInView } from 'react-intersection-observer'
 
 const fetchColors = ({ pageParam = 1 }) => {
-  return axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=3&_page=${pageParam}`)
+  return axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=18&_page=${pageParam}`)
 }
 
 export const InfiniteQueriesPage = () => {
+
+  const { ref, inView } = useInView()
+
   const {
     isLoading,
     isError,
@@ -19,13 +23,20 @@ export const InfiniteQueriesPage = () => {
     isFetchingNextPage
   } = useInfiniteQuery(['posts'], fetchColors, {
     getNextPageParam: (_lastPage, pages) => {
-      if (pages.length < 5) {
+      if (pages.length < 10) {
         return pages.length + 1
       } else {
         return undefined
       }
     }
   })
+
+  useEffect(()=>{
+    console.log('Fired')
+    if(inView && hasNextPage){
+      fetchNextPage()
+    }
+  },[inView,hasNextPage,fetchNextPage])
 
   if (isLoading) {
     return <Laoder />
@@ -36,24 +47,32 @@ export const InfiniteQueriesPage = () => {
   }
 
   return (
-    <div style={{paddingLeft:'10%', paddingTop:'2%'}}>
-      <div>
+    <div style={{paddingLeft:'10%', paddingTop:'2%', paddingBottom:'10%'}}>
+      <div style={{padding:'10px'}}>
         {data?.pages.map((group, i) => {
           return (
-            <Fragment key={i}>
-              {group.data.map(post => (
-                <h2 key={post.id}>
+            <>
+              {group.data.map((post,i) => {
+                if(group.data.length === i+1){
+                  return (<h2 ref={ref} key={post.id}>
+                    {post.id} {post.title}
+                  </h2>)
+                }
+                return (<h2 key={post.id}>
                   {post.id} {post.title}
-                </h2>
-              ))}
-            </Fragment>
+                </h2>)
+        })}
+            </>
           )
         })}
       </div>
       <div>
-        <button onClick={() => fetchNextPage()} disabled={!hasNextPage}>
+        {isFetchingNextPage && <h3>Loading....</h3>}
+        {/* <button 
+        // ref={ref}
+        onClick={() => fetchNextPage()} disabled={!hasNextPage}>
           Load more
-        </button>
+        </button> */}
       </div>
       <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
       {!hasNextPage && <h4>Reached the limit ....</h4>}
